@@ -1,0 +1,31 @@
+Feature: Product Attributes CMS API Test
+Background:
+	* url 'https://devproductcatalogmanagementservice.azurewebsites.net'
+	
+Scenario: Get Self User Details
+Given header Content-Type = 'application/json'
+And header Accept-Encoding = 'gzip,deflate'
+And header Connection = 'keep-alive'
+And header User-Agent = 'PostmanRuntime/7.29.2'
+And header Authorization = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ7XCJjbGllbnRJZFwiOjEsXCJlbWFpbElkXCI6XCJuaXRlc2gua0B0cmV6aS5jb21cIixcImNvb2tpZVwiOlwiand0XFx1MDAzZGV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpsYldGcGJDSTZJbTVwZEdWemFDNXJRSFJ5WlhwcExtTnZiU0lzSW1saGRDSTZNVFkyTVRRNU5EZzVNSDAubjhrdjBLNVJOaTZpR3lncGgyQUhzTEUwWlVUUEl4ZW8zdlNvNjFxalVHVTsgTWF4LUFnZVxcdTAwM2Q0MzIwMDA7IFBhdGhcXHUwMDNkLzsgRXhwaXJlc1xcdTAwM2RXZWQsIDMxIEF1ZyAyMDIyIDA2OjIxOjMwIEdNVDsgZW1haWxcXHUwMDNkbml0ZXNoLmslNDB0cmV6aS5jb207IE1heC1BZ2VcXHUwMDNkNDMyMDAwOyBQYXRoXFx1MDAzZC87IEV4cGlyZXNcXHUwMDNkV2VkLCAzMSBBdWcgMjAyMiAwNjoyMTozMCBHTVQ7IGlzTG9nZ2VkSW5cXHUwMDNkdHJ1ZTsgTWF4LUFnZVxcdTAwM2Q0MzIwMDA7IFBhdGhcXHUwMDNkLzsgRXhwaXJlc1xcdTAwM2RXZWQsIDMxIEF1ZyAyMDIyIDA2OjIxOjMwIEdNVDsgQVJSQWZmaW5pdHlcXHUwMDNkYjM4MzJmOGI3ZWZhMGI1NDc0YTU2Zjg4MGNkYzE4NzRlZjc1Y2Y1OWQyZTZiODc0M2NiMDNiYmE5ZTNlNGJlOTtQYXRoXFx1MDAzZC87SHR0cE9ubHk7U2VjdXJlO0RvbWFpblxcdTAwM2RhcHAudHJlemkuY29tOyBBUlJBZmZpbml0eVNhbWVTaXRlXFx1MDAzZGIzODMyZjhiN2VmYTBiNTQ3NGE1NmY4ODBjZGMxODc0ZWY3NWNmNTlkMmU2Yjg3NDNjYjAzYmJhOWUzZTRiZTk7UGF0aFxcdTAwM2QvO0h0dHBPbmx5O1NhbWVTaXRlXFx1MDAzZE5vbmU7U2VjdXJlO0RvbWFpblxcdTAwM2RhcHAudHJlemkuY29tOyBcIn0iLCJleHAiOjE2NjIwOTk4MTB9.eZSyUeT1gebRNWIHEkI4P7bSHbr_t7JzmxTFzYuzOhE'
+
+Given  path '/productcatalog/api/v1/auth/me'
+When  method GET
+Then  status 200
+And print response
+And match $.data.email == '#present'
+And match $.data.email == 'nitesh.k@trezi.com'
+
+
+Scenario: Get Self User Details without Authorization
+Given header Content-Type = 'application/json'
+And header Accept-Encoding = 'gzip,deflate'
+And header Connection = 'keep-alive'
+And header User-Agent = 'PostmanRuntime/7.29.2'
+
+
+Given  path '/productcatalog/api/v1/auth/me'
+When  method GET
+Then  status 400
+And print response
+
